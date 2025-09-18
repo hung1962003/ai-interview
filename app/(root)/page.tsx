@@ -12,7 +12,7 @@ import {
 
 async function Home() {
   const user = await getCurrentUser();
-
+  console.log("User in interview page:", user?.id);
   const [userInterviews, allInterview] = await Promise.all([
     getInterviewsByUserId(user?.id!),
     getLatestInterviews({ userId: user?.id! }), // Provide a fallback value
