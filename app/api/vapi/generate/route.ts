@@ -6,8 +6,8 @@ import { getRandomInterviewCover } from "@/lib/utils";
 import admin from "firebase-admin";
 
 export async function POST(request: Request) {
-  const { type, role, level, techstack, amount, userid } = await request.json();
-
+  const { type, role, level, techstack, amount, userId } = await request.json();
+  console.log( "Request body:", { type, role, level, techstack, amount, userId });
   try {
     const parsedAmount = Number(amount) || 5; // fallback = 5 nếu không parse được
 
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
       level,
       techstack: techstack.split(",").map((s: string) => s.trim()),
       questions,
-      userId: userid,
+      userId: userId,
       finalized: true,
       coverImage: getRandomInterviewCover(),
       createdAt: admin.firestore.Timestamp.now(), // chuẩn Firestore timestamp
